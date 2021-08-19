@@ -105,11 +105,13 @@
                         .then(json => {
                           // Do something with the data
                           console.log(json.allData);
-                          var dat = json.allData;
+                            var dat = json;
                           for (dat in item) {
-                            console.log('item' + item);
-
+                            for (item in part) {
+                               console.log('item' + part);
+                            }
                           }
+
 
                        
 
