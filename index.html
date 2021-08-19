@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -47,7 +48,7 @@
         }
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Y1HESNQR3"></script>
@@ -55,7 +56,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-6Y1HESNQR3');
 </script> -->
     </head>
@@ -103,9 +103,29 @@
                         
                          $.getJSON(url, function(result){
                                  console.log(result.allData);
-                                 var allDataAr = result.allData;
+                                 var allUnsortedDataAr = result.allData;
+                                 allUnsortedDataAr.sort(function(a,b){
+                                    var aDateString = (a.date).split("-");
+                                    var aDate = new Date(aDateString[2], aDateString[1] - 1, aDateString[0]);
+                                    var bDateString = (b.date).split("-");
+                                    var bDate = new Date(bDateString[2], bDateString[1] - 1, bDateString[0]);
+                                    // Turn your strings into dates, and then subtract them
+                                    // to get a value that is either negative, positive, or zero.
+                                    return new Date(bDate) - new Date(aDate);
+                                });
+                                 var allDataAr = allUnsortedDataAr;
                                  for(var i = 0;i < allDataAr.length; i++) {
-                                     $("#" + allDataAr[i].year + " ul").append("<li>" + allDataAr[i].date + " - <a href=\"" + allDataAr[i].main_source + "\">" + allDataAr[i].name + "</a> - " +  allDataAr[i].description + "</li>");
+                                     var id = "#parent" + allDataAr[i].year + " ul";
+                                     console.log(id);
+                                     var month = allDataAr[i].hasMonth == '0' ? '' : allDataAr[i].month;
+                                     var day = allDataAr[i].hasDay == '0' ? '' : allDataAr[i].day;
+                                     if (month !== '' && (1 * month) < 10) { month = "0" + month; }
+                                     if (day !== '' && (1 * day) < 10) { day = "0" + day; }
+                                     if (month !== '') { month = "-" + month; }
+                                     if (day !== '') { day = "-" + day; }
+                                     if (month == '') { month = "-__" ; }
+                                     if (day == '') { day = "-__"; }
+                                     $(id).append("<li>" + allDataAr[i].year + "" + month + "" + day + " - <a href=\"" + allDataAr[i].main_source + "\">" + allDataAr[i].name + "</a> - " +  allDataAr[i].description + "</li>");
                                  }
                        
                              
@@ -119,15 +139,13 @@
                     
                     <!-- 2021 - coming -->
                     <div>
-                        <h3 id="2021">2021 - coming</h3>
+                        <h3 id="2021coming">2021 - coming</h3>
                         <ul>
-                            
-                            <li>2021 - <a href="https://digital.xyz/">Digital</a> - NFT fashion</li>                                          
-
+                         
                         </ul>
                     </div>
                     <!-- 2021 -->
-                    <div>
+                    <div id="parent2021">
                         <h3 id="2021">2021</h3>
                         <ul>
                        
@@ -141,21 +159,25 @@
                    
                 
                     <!-- 2020 -->
-                    <div>
+                    <div id="parent2020">
                         <h3 id="2020">2020</h3>
                         <ul>
-                            <li>2020 - <a href="https://www.somniumspace.com">Somnium Space</a></li>
+                          
 
                         </ul>
                     </div>
                         <!-- 2019 -->
-                    <div>
+                    <div id="parent2019">
                         <h3 id="2019">2019</h3>
+                        <ul>
+                       
 
+                            
+                        </ul>
                       
                     </div>
                   <!-- 2018 -->
-                    <div>
+                    <div id="parent2018">
                         <h3 id="2018">2018</h3>
                         <ul>
                        
