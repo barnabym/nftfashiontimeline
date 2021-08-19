@@ -104,9 +104,9 @@
                                            fetch(url)
                         .then(json => {
                           // Do something with the data
-                          console.log(json.allData);
+                          console.log(json);
                             var dat = json;
-                          for (dat in item) {
+                          for (item in dat) {
                             for (item in part) {
                                console.log('item' + part);
                             }
