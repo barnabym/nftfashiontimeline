@@ -99,16 +99,17 @@
                     </div> -->
                     
                     <script>
-                        let url = 'https://api.sheety.co/ec06c440fd15fe8c32df5d01111e7b33/nftNFT FashionTimeline/allData';
+let url = 'https://api.sheety.co/ec06c440fd15fe8c32df5d01111e7b33/nftFashionTimeline/allData';
+
                         fetch(url)
                         .then((response) => response.json())
                         .then(json => {
                           // Do something with the data
                           console.log(json.allData);
-                          // foreach (json.allData as item) {
-                          //   console.log(json.allData);
+                          foreach (json.allData as item) {
+                            console.log('item' + json.item);
 
-                          // }
+                          }
                         });
                     </script>
                     
