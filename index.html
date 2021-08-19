@@ -102,28 +102,16 @@
                         let url = 'https://api.sheety.co/ec06c440fd15fe8c32df5d01111e7b33/nftFashionTimeline/allData';
                         
                          $.getJSON(url, function(result){
-                             console.log(result);
-                            $.each(result, function(i, field){
-                              $("div").append(field + " ");
-                            });
+                                 console.log(result.allData);
+                                 var allDataAr = result.allData;
+                                 for(var i = 0;i < allDataAr.length; i++) {
+                                     $("#" + allDataAr[i].year + " ul").append("<li>" + allDataAr[i].date + " - <a href=\"" + allDataAr[i].main_source + "\">" + allDataAr[i].name + "</a> - " +  allDataAr[i].description + "</li>");
+                                 }
+                       
+                             }
+
                           });
 
-//                                            fetch(url)
-//                         .then(json => {
-//                           // Do something with the data
-//                           console.log(json);
-//                             var dat = json;
-//                           for (item in dat) {
-//                               console.log('it' + item);
-//                             for (part in item) {
-//                                console.log('part' + part);
-//                             }
-//                           }
-
-
-                       
-
-                        //});
                     </script>
                     
                     
